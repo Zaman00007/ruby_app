@@ -9,6 +9,28 @@
   </div>
 
   <div id="patient_records" class="min-w-full">
-    <%= render @patient_records %>
+    <table class="min-w-full">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 bg-brown-500 text-white">Name</th>
+          <th class="px-4 py-2 bg-brown-500 text-white">Age</th>
+          <th class="px-4 py-2 bg-brown-500 text-white">Gender</th>
+          <th class="px-4 py-2 bg-brown-500 text-white">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @patient_records.each do |patient_record| %>
+          <tr>
+            <td class="border px-4 py-2"><%= patient_record.name %></td>
+            <td class="border px-4 py-2"><%= patient_record.age %></td>
+            <td class="border px-4 py-2"><%= patient_record.gender %></td>
+            <td class="border px-4 py-2">
+              <%= link_to "View", patient_record_path(patient_record), class: "bg-blue-500 text-white py-1 px-3 rounded-lg mr-2" %>
+              <%= link_to "Edit", edit_patient_record_path(patient_record), class: "bg-yellow-500 text-white py-1 px-3 rounded-lg" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
