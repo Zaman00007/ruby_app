@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :patient_records
   devise_for :admins, skip: [:registrations]
   devise_for :users
   resources :courses
@@ -14,5 +15,5 @@ Rails.application.routes.draw do
 
   get "admin" => "admin#index"
   # Defines the root path route ("/")
-  root "courses#index"
+  root "patient_records#index"
 end

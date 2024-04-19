@@ -1,0 +1,27 @@
+<div id="<%= dom_id patient_record %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= patient_record.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Age:</strong>
+    <%= patient_record.age %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Gender:</strong>
+    <%= patient_record.gender %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Issue:</strong>
+    <%= patient_record.issue %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this patient record", patient_record, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this patient record", edit_patient_record_path(patient_record), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
