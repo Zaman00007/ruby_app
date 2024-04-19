@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "admin" => "admin#index"
+  get "courses" =>"courses#index"
   # Defines the root path route ("/")
   root "patient_records#index"
 end
