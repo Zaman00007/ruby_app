@@ -1,18 +1,61 @@
-<!-- app/views/admin/index.html.erb -->
-<h1>Registration Logs</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Registrations</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @registration_logs.each do |date, registrations| %>
-      <tr>
-        <td><%= date.strftime('%Y-%m-%d') %></td>
-        <td><%= registrations %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Logs</title>
+  <!-- Include Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1 class="text-2xl font-bold mb-4">Registration Logs</h1>
+  <canvas id="registrationChart" style="height: 400px;"></canvas>
+
+  <%# Convert Ruby data to JSON and pass it to JavaScript %>
+  <script>
+    const registrationData = <%= @registration_logs.to_json.html_safe %>;
+    const dates = registrationData.map(log => log.date);
+    const registrations = registrationData.map(log => log.registrations);
+
+    const ctx = document.getElementById('registrationChart').getContext('2d');
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+          label: 'Registrations',
+          data: registrations,
+          borderColor: '#ed7d31',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'YYYY-MM-DD'
+              }
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Date'
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Registrations'
+            }
+          }]
+        }
+      }
+    });
+  </script>
+</body>
+</html>
