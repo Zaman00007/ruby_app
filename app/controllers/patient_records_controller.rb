@@ -23,9 +23,12 @@ class PatientRecordsController < ApplicationController
   # POST /patient_records or /patient_records.json
   def create
     @patient_record = PatientRecord.new(patient_record_params)
-
+  
     respond_to do |format|
       if @patient_record.save
+        # Call the increment_registration_count method after saving the patient record
+        @patient_record.increment_registration_count
+  
         format.html { redirect_to patient_record_url(@patient_record), notice: "Patient record was successfully created." }
         format.json { render :show, status: :created, location: @patient_record }
       else
@@ -33,6 +36,8 @@ class PatientRecordsController < ApplicationController
         format.json { render json: @patient_record.errors, status: :unprocessable_entity }
       end
     end
+  
+  
   end
 
   # PATCH/PUT /patient_records/1 or /patient_records/1.json

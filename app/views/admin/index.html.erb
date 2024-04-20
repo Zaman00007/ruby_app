@@ -1,1 +1,18 @@
-<h1>Admin Index</h1>
+<!-- app/views/admin/index.html.erb -->
+<h1>Registration Logs</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Registrations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registration_logs.each do |date, registrations| %>
+      <tr>
+        <td><%= date.strftime('%Y-%m-%d') %></td>
+        <td><%= registrations %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

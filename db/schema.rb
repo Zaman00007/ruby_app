@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_100022) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_20_020537) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -35,6 +35,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_100022) do
     t.integer "age"
     t.string "gender"
     t.text "issue"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "patient_registration_logs", force: :cascade do |t|
+    t.date "date"
+    t.integer "registrations", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "patient_record_id"
+    t.index ["patient_record_id"], name: "index_patient_registration_logs_on_patient_record_id"
+  end
+
+  create_table "patient_registrations", force: :cascade do |t|
+    t.date "date"
+    t.integer "registrations", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,4 +80,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_100022) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "patient_registration_logs", "patient_records"
 end
