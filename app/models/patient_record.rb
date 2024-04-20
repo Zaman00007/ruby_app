@@ -4,7 +4,7 @@ class PatientRecord < ApplicationRecord
   has_one :patient_registration_log, dependent: :destroy
 
   # Callbacks
-  after_create :increment_registration_count
+  # after_create :increment_registration_count
 
   
 
@@ -13,7 +13,9 @@ class PatientRecord < ApplicationRecord
   # Method to increment the registration count for the current day
   def increment_registration_count
   # Find the registration log for today's date, or build a new one if not found
-  log = patient_registration_log || build_patient_registration_log(date: Date.today)
+  patient_registration_log = PatientRegistrationLog.where(date: Date.today).first
+  log = patient_registration_log || PatientRegistrationLog.new(date: Date.today)
+
 
   # Update its registrations count
   log.registrations ||= 0
