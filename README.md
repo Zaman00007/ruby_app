@@ -1,11 +1,9 @@
-# README
+# Receptionist & Doctor Portal Rails Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails application provides a receptionist portal and a doctor portal where receptionists can register new patients and perform CRUD operations, and doctors can view registered patients and a graph representing the number of patients registered vs days.
 
-Things you may want to cover:
 
-* Ruby version
+* Description
 
 * System dependencies
 
